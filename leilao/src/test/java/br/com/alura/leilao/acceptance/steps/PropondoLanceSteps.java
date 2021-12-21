@@ -21,7 +21,7 @@ import io.cucumber.java.pt.Quando;
 
 public class PropondoLanceSteps {
 	
-	private Lance lance10;
+	private Lance lance;
 	private Leilao leilao;
 	private List<Lance> lista;
 	
@@ -33,18 +33,18 @@ public class PropondoLanceSteps {
 	
 	@After
 	public void tearDown() {
-		System.out.println("After");
+		//System.out.println("After");
 	}
 
 	@Dado("um lance valido")
 	public void dado_um_lance_valido() {
 	    Usuario usuario = new Usuario("roberio");
-		lance10 = new Lance(usuario , BigDecimal.TEN);
+		this.lance = new Lance(usuario , BigDecimal.TEN);
 	}
 	
 	@Quando("propoe ao leilao")
 	public void quando_propoe_o_lance() {
-	    leilao.propoe(lance10);
+	    leilao.propoe(lance);
 	}
 	
 	@Entao("o lance e aceito")
@@ -56,8 +56,8 @@ public class PropondoLanceSteps {
 	
 	@Dado("um lance de {double} reais do usuario {string}")
 	public void um_lance_de_reais_valido_do_usuario(Double valor, String nomeUsuario) {
-		Lance lance = new Lance(new Usuario(nomeUsuario), new BigDecimal(valor));
-		lista.add(lance);
+		Lance lanceValido = new Lance(new Usuario(nomeUsuario), new BigDecimal(valor));
+		lista.add(lanceValido);
 	}
 
 	@Quando("propostos ao leilao")
@@ -75,6 +75,15 @@ public class PropondoLanceSteps {
 	    Assert.assertEquals(this.lista.get(1).getValor(), leilao.getLances().get(1).getValor());
 	    Assert.assertEquals(this.lista.get(2).getValor(), leilao.getLances().get(2).getValor());
 	}
-
+	
+	@Dado("um lance invalido de {double} reais do usuario {string}")
+	public void um_lance_invalido_de_reais(Double valor, String nomeUsuario) {
+	   this.lance = new Lance(new BigDecimal(valor));
+	}
+	
+	@Entao("o lance nao e aceito")
+	public void entao_o_lance_nao_e_aceito() {
+	    Assert.assertTrue(leilao.getLances().isEmpty());
+	}
 
 }

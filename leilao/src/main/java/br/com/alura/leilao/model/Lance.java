@@ -89,5 +89,9 @@ public class Lance {
 	public void setLeilao(Leilao leilao) {
 		this.leilao = leilao;
 	}
+	
+	public boolean ehUmLanceValido(BigDecimal valor) {
+		return valor.compareTo(BigDecimal.ZERO) > 0;
+	}
 
 }

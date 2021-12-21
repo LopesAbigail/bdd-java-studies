@@ -45,7 +45,6 @@ public class Leilao {
 	@OneToMany(mappedBy = "leilao")
 	private List<Lance> lances = new ArrayList<>();
 
-	@Deprecated
 	public Leilao() {
 	}
 
@@ -129,10 +128,13 @@ public class Leilao {
 
 	public boolean propoe(Lance lanceAtual) {
 		
-		if (this.estaSemLances() || ehUmLanceValido(lanceAtual)) {
-			adicionarLance(lanceAtual);
-			return true;
+		if (lanceAtual.ehUmLanceValido(lanceAtual.getValor())) {
+			if (this.estaSemLances() || ehUmLanceValido(lanceAtual)) {
+				adicionarLance(lanceAtual);
+				return true;
+			}
 		}
+		
 		return false;
 	}
 
@@ -142,7 +144,7 @@ public class Leilao {
 	}
 
 	private boolean ehUmLanceValido(Lance lance) {
-		return valorEhMaior(lance, ultimoLanceDado()) && 
+		return  valorEhMaior(lance, ultimoLanceDado()) && 
 				oUltimoUsuarioNaoEhOMesmoDo(lance) && 
 				totalDeLancesDoUsuarioEhMenorIgual5(lance.getUsuario());
 	}
@@ -177,6 +179,7 @@ public class Leilao {
 
 	private Lance ultimoLanceDado() {
 		return lances.get(lances.size() - 1);
+		
 	}
 
 	public List<Lance> getLances() {
