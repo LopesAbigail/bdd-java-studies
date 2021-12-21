@@ -22,7 +22,7 @@ public class PropondoLanceSteps {
 		lance = new Lance(usuario , BigDecimal.TEN);
 	}
 	
-	@When("Quando propoe o lance")
+	@When("Quando propoe ao leilao")
 	public void quando_propoe_o_lance() {
 	    leilao = new Leilao("Tablete XPTO");
 	    leilao.propoe(lance);
