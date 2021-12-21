@@ -24,3 +24,11 @@ Esquema do Cenario: Propondo um lance invalido
  	| 0     | roberio     |
  	| -1    | rodolfo     |
  	| -100  | raimundo    |
+ 	
+Cenario: Propondo uma sequencia invalida de lances
+ Dado um conjunto de dois lances
+  | valor   | nomeUsuario |
+ 	| 10.0    | roberio     |
+ 	| 15.0    | roberio     |
+ Quando propostos ao leilao
+ Entao o segundo lance nao eh aceito

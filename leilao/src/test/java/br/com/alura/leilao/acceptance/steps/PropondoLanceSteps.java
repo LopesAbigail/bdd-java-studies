@@ -3,6 +3,7 @@ package br.com.alura.leilao.acceptance.steps;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,5 +86,21 @@ public class PropondoLanceSteps {
 	public void entao_o_lance_nao_e_aceito() {
 	    Assert.assertTrue(leilao.getLances().isEmpty());
 	}
-
+	
+	@Dado("um conjunto de dois lances")
+	public void um_conjunto_de_dois_lances(io.cucumber.datatable.DataTable dataTable) {
+	    List<Map<String, String>> valores = dataTable.asMaps();
+	    
+	    valores.forEach((valor) -> {
+	    	Lance lance = new Lance(new Usuario(valor.get("nome")), new BigDecimal(valor.get("valor")));
+	    	lista.add(lance);
+	    });
+	}
+	
+	@Entao("o segundo lance nao eh aceito")
+	public void o_segundo_lance_nao_eh_aceito() {
+		Assert.assertFalse(leilao.getLances().isEmpty());
+	    Assert.assertEquals(1, leilao.getLances().size());
+	    Assert.assertEquals(this.lista.get(0).getValor(), leilao.getLances().get(0).getValor());
+	}
 }
