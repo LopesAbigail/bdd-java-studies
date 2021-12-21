@@ -92,7 +92,7 @@ public class PropondoLanceSteps {
 	    List<Map<String, String>> valores = dataTable.asMaps();
 	    
 	    valores.forEach((valor) -> {
-	    	Lance lance = new Lance(new Usuario(valor.get("nome")), new BigDecimal(valor.get("valor")));
+	    	Lance lance = new Lance(new Usuario(valor.get("nomeUsuario")), new BigDecimal(valor.get("valor")));
 	    	lista.add(lance);
 	    });
 	}
