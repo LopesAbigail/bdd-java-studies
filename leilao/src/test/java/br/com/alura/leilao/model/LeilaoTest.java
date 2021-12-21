@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class LeilaoTest {
 	
 	
-	@DisplayName("um usuario pode dar lance em um leilao de outro usuario")
+	@DisplayName("Um usuario pode dar um lance em um leilao de outro usuario")
 	@Test
     public void deveReceberUmLance() {
         Leilao leilao = new Leilao("Macbook Pro 15");
@@ -23,7 +23,7 @@ public class LeilaoTest {
         assertEquals(doisMil, leilao.getLances().get(0).getValor());
     }
 	
-	
+	@DisplayName("Um usuario nao pode lancar um valor igual a um lancado anteriormente")
 	@Test
     public void naoDeveAceitarUmLanceIgualAoAnterior() {
         Leilao leilao = new Leilao("Macbook Pro 15");
